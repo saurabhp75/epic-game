@@ -7,21 +7,32 @@ const main = async () => {
       "https://i.ibb.co/LkCtc47/Goofy.png",
       "https://i.ibb.co/3MDN0Z3/Donald-Duck.png",
     ],
-    [100, 200, 300], // HP values
-    [100, 50, 25] // Attack damage values
+    [100, 200, 10], // HP values
+    [100, 50, 25], // Attack damage values
+    "Bezos", // Boss name
+    "https://i.ibb.co/Jm2Jbsx/bezos.jpg", // Boss image
+    10000, // Boss hp
+    50 // Boss attack damage
   );
   await gameContract.deployed();
   console.log("Contract deployed to:", gameContract.address);
 
   let txn;
   // We only have three characters.
-  // an NFT w/ the character at index 2 of our array.
+  // Mint an NFT w/ the character at index 2 of our array.
   txn = await gameContract.mintCharacterNFT(2);
   await txn.wait();
 
-  // Get the value of the NFT's URI.
+  // Get the token URI of NFT with tokenId 1.
   let returnedTokenUri = await gameContract.tokenURI(1);
   console.log("Token URI:", returnedTokenUri);
+
+  // txn = await gameContract.attackBoss();
+  // await txn.wait();
+
+  // test for second attack
+  // txn = await gameContract.attackBoss();
+  // await txn.wait();
 };
 
 const runMain = async () => {
